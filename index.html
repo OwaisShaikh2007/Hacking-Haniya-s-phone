@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Terminal Surprise for Haniya</title>
+<style>
+body{
+  margin:0;background:#000;color:#7CFF71;font-family:monospace;
+  display:flex;justify-content:center;align-items:flex-start;padding:20px;
+}
+.wrap{width:100%;max-width:480px;}
+.line{opacity:0;white-space:pre-wrap;font-size:18px;margin:12px 0;}
+#flower{width:100%;max-width:360px;margin:20px auto;display:none;}
+.btn{
+  display:block;margin:40px auto 0 auto;padding:14px 20px;background:#7CFF71;border:none;
+  font-weight:bold;color:#000;border-radius:8px;cursor:pointer;font-size:18px;
+}
+#confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="line">Initializing surprise program...</div>
+  <div class="line">Loading modules: surprise.js ✔</div>
+  <div class="line">Hacking Haniya's phone...</div>
+  <div class="line">Calibrating cuteness levels…</div>
+  <div class="line">Encrypting secret message…</div>
+  <div class="line">Bypassing firewall of your heart…</div>
+  <div class="line">Scanning for smiles…</div>
+  <div class="line">Deploying surprise package…</div>
+  <div class="line">Establishing secure connection to your happiness…</div>
+  <div class="line">Uploading virtual flowers…</div>
+  <div class="line">Success: Flowers delivered to the prettiest user online</div>
+  <div class="line">Locating the prettiest girl on the network…</div>
+  <div class="line">Warning: Your smile is causing server overheating 😳</div>
+  <div class="line">Applying cool-down protocol… failed.</div>
+  <div class="line">Deploying flowers before I melt…</div>
+  <div class="line">Attaching flowers...</div>
+
+  <img id="flower" src="flower.png" xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='40' fill='%23ff9a9e'/%3E%3C/svg%3E"/>
+
+  <button class="btn" id="showBtn">Surprise</button>
+  <div id="safeMsg" style="display:none;text-align:center;color:#7CFF71;font-size:16px;margin-top:15px;">I was kidding — your phone is safe 🐾
+  <div class="line">Decrypting a message meant only for you…</div>
+  <div class="line">Fun fact: My system keeps glitching every time I think about you.</div>
+  <div class="line">Installing ‘Control Myself.exe’… installation failed.</div>
+  <div class="line">Certified warning: You’re dangerously attractive.</div>
+  
+</div>
+<canvas id="confetti"></canvas>
+<script>
+const lines=document.querySelectorAll('.line');
+let i=0;
+function showNext(){if(i>=lines.length) return; const l=lines[i++]; l.style.opacity=1; setTimeout(showNext,1000);} 
+setTimeout(showNext,800);
+
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}resize();addEventListener("resize",resize);
+let pieces=[];
+function Confetti(){this.x=Math.random()*canvas.width;this.y=Math.random()*-canvas.height;this.size=6+Math.random()*8;this.speed=2+Math.random()*3;this.color="#7CFF71";this.rot=Math.random()*360;}
+Confetti.prototype.update=function(){this.y+=this.speed;if(this.y>canvas.height)this.y=-10;this.rot+=2;};
+Confetti.prototype.draw=function(){ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rot*Math.PI/180);ctx.fillStyle=this.color;ctx.fillRect(-this.size/2,-this.size/2,this.size,this.size*0.6);ctx.restore();};
+function run(){ctx.clearRect(0,0,canvas.width,canvas.height);pieces.forEach(p=>{p.update();p.draw();});requestAnimationFrame(run);}run();
+
+showBtn.onclick = () => {
+  document.getElementById('flower').style.display = 'block';
+  pieces = [];
+  for (let j = 0; j < 120; j++) pieces.push(new Confetti());
+  
+  // SHOW SAFE MESSAGE
+  const msg = document.getElementById('safeMsg');
+  msg.style.display = 'block';
+};
+</script>
+</body>
+</html>
